@@ -211,7 +211,7 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
     if (isVerified) {
       const newCount = balance + task.amount;
       console.log(balance, newCount)
-  
+      alert(newCount, balance)
       setBalance(newCount);
       setMessage("");
       setIsMissionButtonDisabled(true); // Optionally disable the button again after mission completion
