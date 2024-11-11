@@ -4,6 +4,7 @@ body{
   color: #fff;
   height: var(--tg-viewport-stable-height);
   /* touch-action: none; Prevent touch actions*/
+  touch-action:
 }
 
 .cards__container{
