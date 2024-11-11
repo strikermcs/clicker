@@ -55,7 +55,7 @@ const MilestoneRewards = () => {
   };
 
   return (
-    <div className="w-full flex flex-col space-y-4">
+    <div className="w-full flex flex-col h-full overflow-y-auto scroller space-y-4">
 
       {milestones.filter(milestone => !claimedMilestones.includes(milestone.name)).map((milestone) => {
         const progress = (tapBalance / milestone.tapBalanceRequired) * 100;
