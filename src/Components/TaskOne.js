@@ -49,19 +49,19 @@ const TaskOne = ({ showModal, setShowModal, task }) => {
   
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (id) {
-      checkTaskCompletion(id, task.id).then((completed) => {
-        setTaskCompleted(completed);
-        if (completed) {
-          setMessage("");
-          setIsMissionButtonDisabled(false);
-        }
-      });
-    }
-    // eslint-disable-next-line
-  }, [id]);
+  //   if (id) {
+  //     checkTaskCompletion(id, task.id).then((completed) => {
+  //       setTaskCompleted(completed);
+  //       if (completed) {
+  //         setMessage("");
+  //         setIsMissionButtonDisabled(false);
+  //       }
+  //     });
+  //   }
+  //   // eslint-disable-next-line
+  // }, [id]);
   
 
 
