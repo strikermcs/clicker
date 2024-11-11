@@ -185,7 +185,7 @@ const Tasks = () => {
 
             <div className='!mt-[204px] w-full h-[60vh] flex flex-col'>
 
-              <div className={`${activeIndex === 1 ? 'flex' : 'hidden'}  flex-col w-full space-y-2 !overflow-y-scroll h-[60vh] touch-pan-y`}>
+              <div className={`${activeIndex === 1 ? 'flex' : 'hidden'}  flex-col w-full space-y-2 !overflow-y-scroll h-[60vh] !touch-pan-y`}>
                 
               {tasks.map((task) => ( 
                 
