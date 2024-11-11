@@ -183,9 +183,9 @@ const Tasks = () => {
             </div>
 
 
-            <div className='!mt-[204px] w-full h-[60vh] flex flex-col'>
+            <div className='!mt-[204px] w-full h-[53vh] flex flex-col'>
 
-              <div id="refer" className={`${activeIndex === 1 ? 'flex' : 'hidden' } 'w-full flex flex-col space-y-[10px] scroller overflow-y-auto h-[55dvh] pb-[150px]'`}>
+              <div id="refer" className={`${activeIndex === 1 ? 'flex' : 'hidden' } 'w-full flex flex-col space-y-[10px] scroller overflow-y-auto h-full pb-[150px]'`}>
                 
               {tasks.map((task) => ( 
                 
