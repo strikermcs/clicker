@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { useUser } from "../context/userContext";
 import { json } from "react-router-dom";
+import { IoAlarm } from "react-icons/io5";
 // import { EnergyContext } from "../context/EnergyContext";
 
 const TaskOne = ({ showModal, setShowModal, task }) => {
@@ -209,6 +210,8 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
 
     if (isVerified) {
       const newCount = balance + task.amount;
+      console.log(balance, newCount)
+      alarm(balance)
       setBalance(newCount);
       setMessage("");
       setIsMissionButtonDisabled(true); // Optionally disable the button again after mission completion
