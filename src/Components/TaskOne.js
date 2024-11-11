@@ -26,7 +26,6 @@ const TaskOne = ({ showModal, setShowModal, task }) => {
   const [openComplete, setOpenComplete] = useState(false);
   const [isMissionButtonDisabled, setIsMissionButtonDisabled] = useState(true);
 
-  const userId = '773828463'
 
   useEffect(() => {
     const handleBackButtonClick = () => {
@@ -62,7 +61,7 @@ const TaskOne = ({ showModal, setShowModal, task }) => {
       });
     }
     // eslint-disable-next-line
-  }, []);
+  }, [id]);
   
 
 
@@ -72,10 +71,29 @@ const TaskOne = ({ showModal, setShowModal, task }) => {
     setTimeout(() => {
       setShowTaskButton(false);
     }, 2000);
-    setTimeout(() => {
-      setShowCheckButton(true);
-    }, 2000);
+
+    if(task.isCheckTask) { 
+      setTimeout(() => {
+        setShowCheckButton(true);
+      }, 2000);
+    } else {
+      finishTaskWithoutVerification();
+    }
+  
   };
+
+  const finishTaskWithoutVerification = async () => {
+      setIsVerified(true);
+      setCounter(15);
+      setTimeout(() => {
+        setShowDoneButton(true);
+      }, 3000);
+      setTimeout(() => {
+        setShowCheckButton(false);
+        setMessage("");
+        setIsMissionButtonDisabled(false);
+      }, 3000);
+  }
 
   const handleVerify = async () => {
     // Clear any existing interval
@@ -92,7 +110,7 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
     );
     const data = await response.json();
 
-    alert(JSON.stringify(data))
+    // alert(JSON.stringify(data))
     if (data.ok && (data.result.status === "member" || data.result.status === "administrator" || data.result.status === "creator")) {
      
       setIsVerified(true);

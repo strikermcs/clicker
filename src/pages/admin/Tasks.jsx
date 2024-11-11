@@ -9,6 +9,7 @@ export const AdminTasks = () => {
     const [taskAmount, setTaskAmount] = useState(0);
     const [taskLink, setTaskLink] = useState("");
     const [description, setDescription] = useState("");
+    const [isCheckTask, setIsCheckTask] = useState(false);
     const [chatId, setChatId] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [error, setError] = useState(false);
@@ -29,6 +30,7 @@ export const AdminTasks = () => {
                 amount: taskAmount,
                 link: taskLink,
                 chatId: chatId,
+                isCheckTask: isCheckTask,
                 description: description
             }
              const docRef = await addDoc(collection(db, "tasks"), task);
@@ -104,6 +106,10 @@ export const AdminTasks = () => {
                             <input type="text" placeholder="Task Link" value={taskLink} onChange={(e) => setTaskLink(e.target.value)} className="bg-[#332a46] rounded-[10px] p-4 text-[#fff] w-full" />
                             <input type="text" placeholder="CHAT ID" value={chatId} onChange={(e) => setChatId(e.target.value)} className="bg-[#332a46] rounded-[10px] p-4 text-[#fff] w-full" />
                             <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} className="bg-[#332a46] rounded-[10px] p-4 text-[#fff] w-full" />
+                            <label className="flex items-center flex-row-reverse">
+                                <span className="text-[#fff]">Check if the task is completed?</span>
+                                <input type="checkbox" onChange={(e) => setIsCheckTask(e.target.checked)} className="bg-[#332a46] rounded-[10px] p-4 text-[#fff] w-full" />
+                            </label>    
                             <button onClick={addTask} 
                                 className="bg-[#f5bb5f] font-semibold text-[15px] rounded-[6px] h-fit px-4 py-3 text-[#000] hover:bg-[#f5bb5f]/80 transition-all duration-500">          
                                     Add Task
