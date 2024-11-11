@@ -246,7 +246,7 @@ body{
   background-color: #191b33;
   color: #fff;
   height: var(--tg-viewport-stable-height);
-  touch-action: none; /* Prevent touch actions */
+  /* touch-action: none; Prevent touch actions */
 }
 
 
