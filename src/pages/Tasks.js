@@ -11,7 +11,6 @@ import TaskOne from '../Components/TaskOne';
 import ClaimLeveler from '../Components/ClaimLeveler';
 import Levels from '../Components/Levels';
 import { IoCheckmarkSharp } from "react-icons/io5";
-import TaskTwo from '../Components/TaskTwo';
 import congrats from "../images/celebrate.gif";
 import { useUser } from '../context/userContext';
 import MilestoneRewards from '../Components/MilestoneRewards';
@@ -27,7 +26,6 @@ const Tasks = () => {
   // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [showModal2, setShowModal2] = useState(false);
   // eslint-disable-next-line
   const [claimLevel, setClaimLevel] = useState(false);
   const [showLevels, setShowLevels] = useState(false);
@@ -61,40 +59,33 @@ const Tasks = () => {
 
   useEffect(() => {
 
-
-    checkTaskCompletion(id, taskID).then((completed) => {
-      setTaskCompleted(completed);
-      if (completed) {
-        setMessage("");
-      }
-    });
-    checkTaskCompletion(id, taskID2).then((completed) => {
-      setTaskCompleted2(completed);
-      if (completed) {
-        setMessage("");
-      }
-    });
+    // checkTaskCompletion(id, taskID).then((completed) => {
+    //   setTaskCompleted(completed);
+    //   if (completed) {
+    //     setMessage("");
+    //   }
+    // });
 
     console.log('my userid is:', id)
 
     // eslint-disable-next-line
   }, []);
 
-  const checkTaskCompletion = async (id, taskId, taskId2) => {
-    try {
-      const userTaskDocRef = doc(db, 'userTasks', `${id}_${taskId}`);
-      const userTaskDocRef2 = doc(db, 'userTasks', `${id}_${taskId2}`);
-      const docSnap = await getDoc(userTaskDocRef, userTaskDocRef2);
-      if (docSnap.exists()) {
-        return docSnap.data().completed;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      console.error('Error checking task completion: ', e);
-      return false;
-    }
-  };
+  // const checkTaskCompletion = async (id, taskId, taskId2) => {
+  //   try {
+  //     const userTaskDocRef = doc(db, 'userTasks', `${id}_${taskId}`);
+  //     const userTaskDocRef2 = doc(db, 'userTasks', `${id}_${taskId2}`);
+  //     const docSnap = await getDoc(userTaskDocRef, userTaskDocRef2);
+  //     if (docSnap.exists()) {
+  //       return docSnap.data().completed;
+  //     } else {
+  //       return false;
+  //     }
+  //   } catch (e) {
+  //     console.error('Error checking task completion: ', e);
+  //     return false;
+  //   }
+  // };
 
 
   const levelsAction = () => {
@@ -116,6 +107,9 @@ const Tasks = () => {
   };
 
   const handleTaskClick = (task) => {
+    if(task.usersTaskCompleted.includes(id)) {
+      return
+    }
     setTask(task);
     setShowModal(true);
   };
@@ -183,7 +177,7 @@ const Tasks = () => {
             </div>
 
 
-            <div className='!mt-[204px] w-full h-[53vh] flex flex-col'>
+            <div className='!mt-[204px] w-full h-[60vh] flex flex-col'>
 
               <div id="refer" className={`${activeIndex === 1 ? 'flex' : 'hidden' } 'w-full flex flex-col space-y-[10px] scroller overflow-y-auto h-full pb-[150px]'`}>
                 
@@ -214,8 +208,9 @@ const Tasks = () => {
 
                   {/*  */}
 
+                  { task.usersTaskCompleted && (
                   <div className=''>
-                    {taskCompleted ? (
+                    {task.usersTaskCompleted.includes(id) ? (
                       <>
 
                         <IoCheckmarkSharp className="w-[20px] h-[20px] text-[#5bd173] mt-[2px]" />
@@ -229,7 +224,7 @@ const Tasks = () => {
                     )}
 
 
-                  </div>
+                  </div>)}
 
                 
                 </div> ))}

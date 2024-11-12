@@ -31,7 +31,8 @@ export const AdminTasks = () => {
                 link: taskLink,
                 chatId: chatId,
                 isCheckTask: isCheckTask,
-                description: description
+                description: description,
+                usersTaskCompleted: []
             }
              const docRef = await addDoc(collection(db, "tasks"), task);
              task.id = docRef.id

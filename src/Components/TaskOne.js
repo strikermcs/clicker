@@ -11,8 +11,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { useUser } from "../context/userContext";
-import { json } from "react-router-dom";
-import { IoAlarm } from "react-icons/io5";
+
 // import { EnergyContext } from "../context/EnergyContext";
 
 const TaskOne = ({ showModal, setShowModal, task }) => {
@@ -48,23 +47,6 @@ const TaskOne = ({ showModal, setShowModal, task }) => {
     };
   }, [showModal, setShowModal]);
   
-
-
-  // useEffect(() => {
-
-  //   if (id) {
-  //     checkTaskCompletion(id, task.id).then((completed) => {
-  //       setTaskCompleted(completed);
-  //       if (completed) {
-  //         setMessage("");
-  //         setIsMissionButtonDisabled(false);
-  //       }
-  //     });
-  //   }
-  //   // eslint-disable-next-line
-  // }, [id]);
-  
-
 
   const handleTaskLinkClick = () => {
     window.open(task.link);
@@ -161,14 +143,11 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
     }
   };
 
-  const saveTaskCompletionToFirestore = async (id, taskId, isCompleted) => {
+  const saveTaskCompletionToFirestore = async (id, task) => {
     try {
-      const userTaskDocRef = doc(db, "userTasks", `${id}_${taskId}`);
-      await setDoc(
-        userTaskDocRef,
-        { userId: id, taskId: taskId, completed: isCompleted },
-        { merge: true }
-      );
+      const docRef = doc(db, "tasks", task.id);
+      const data = { usersTaskCompleted: [...task.usersTaskCompleted, id] }
+      await updateDoc(docRef, data);
       // console.log('Task completion status saved to Firestore.');
     } catch (e) {
       console.error("Error saving task completion status: ", e);
@@ -209,13 +188,12 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
     }, 2000);
 
     if (isVerified) {
-      const newCount = balance + task.amount;
+      const newCount = Number(balance) + Number(task.amount);
       console.log(balance, newCount)
-      alert(newCount, balance)
       setBalance(newCount);
       setMessage("");
       setIsMissionButtonDisabled(true); // Optionally disable the button again after mission completion
-      await saveTaskCompletionToFirestore(id, task.id, true);
+      await saveTaskCompletionToFirestore(id, task);
       // Update the user's count in Firestore
       await updateUserCountInFirestore(id, newCount);
 
