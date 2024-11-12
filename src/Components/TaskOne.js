@@ -165,8 +165,11 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
   };
 
   const finishMission = async () => {
+    setShowDoneButton(false);
+    setShowTaskButton(true);
     setShowModal(false);
     setOpenComplete(false);
+
     document.getElementById("congrat").style.opacity = "1";
     document.getElementById("congrat").style.visibility = "visible";
     setTimeout(() => {
