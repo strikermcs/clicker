@@ -128,20 +128,7 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
     }
   };
 
-  const checkTaskCompletion = async (id, taskId) => {
-    try {
-      const userTaskDocRef = doc(db, "userTasks", `${id}_${taskId}`);
-      const docSnap = await getDoc(userTaskDocRef);
-      if (docSnap.exists()) {
-        return docSnap.data().completed;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      console.error("Error checking task completion: ", e);
-      return false;
-    }
-  };
+
 
   const saveTaskCompletionToFirestore = async (id, task) => {
     try {
@@ -239,7 +226,7 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
               </p>
 
               <p className="w-full text-center text-[14px] font-semibold text-[#49ee49] pb-4">
-                {taskCompleted ? "Task is Completed" : ""}
+                {task.usersTaskCompleted.includes(id) ? "Task is Completed" : ""}
               </p>
               <div className="bg-cards rounded-[10px] p-[14px] flex justify-between items-center">
                 <div className="flex flex-1 items-center space-x-2">
@@ -272,7 +259,7 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
                   </div>
                 </div>
                 <div className="">
-                  {taskCompleted ? (
+                  {task.usersTaskCompleted.includes(id) ? (
                     <></>
                   ) : (
                     <>
@@ -312,10 +299,10 @@ const BOT_TOKEN = '7490661918:AAF_jM6rxU77J-POOcJl0JzVqBi5bZ-RNhU'
                     </button>
                   )}
 
-                  {taskCompleted && <></>}
+                 
                 </div>
               </div>
-              {taskCompleted ? (
+              {task.usersTaskCompleted.includes(id) ? (
                 <>
                   <button
                     className={`my-6 w-full py-5 px-3 flex items-center rounded-[12px] justify-center text-center text-[20px] font-medium text-[#6a6978] bg-btn2`}
